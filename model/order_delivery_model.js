@@ -30,9 +30,13 @@ var order_delivery={
     {
         return db.query('select od.*,o.*,e.*,p.* from order_delivery_table od,order_tbl o,product_tbl p,emp_tbl e where o.order_id=od.fk_order_id and e.emp_id=od.fk_emp_id and p.pro_id=o.fk_pro_id',callback);
     },
+    // getAllOrderNotAssigned(callback)
+    // {
+    //   return db.query('SELECT o.*,c.*,p.* FROM order_tbl o,customer_tbl c,product_tbl p WHERE p.pro_id=o.fk_pro_id and c.customer_id=o.fk_customer_id and  o.order_id NOT IN ( SELECT od.fk_order_id FROM order_delivery_table od) ',callback)
+    // },
     getAllOrderNotAssigned(callback)
     {
-      return db.query('SELECT o.*,c.*,p.* FROM order_tbl o,customer_tbl c,product_tbl p WHERE p.pro_id=o.fk_pro_id and c.customer_id=o.fk_customer_id and  o.order_id NOT IN ( SELECT od.fk_order_id FROM order_delivery_table od) ',callback)
+      return db.query('SELECT o.*,c.*,p.*,od.* FROM order_tbl o,customer_tbl c,product_tbl p,order_delivery_table od WHERE p.pro_id=o.fk_pro_id and c.customer_id=o.fk_customer_id and  o.order_id=od.fk_order_id and od.fk_emp_id IS NULL ',callback)
     },
     AddOrderAssigned:function(item,callback)
     {

@@ -42,6 +42,9 @@ var order={
    getOrderbyCustomerId:function(id,callback)
    {
      return db.query("select c.*,p.*,o.* from customer_tbl c,product_tbl p,order_tbl o where o.fk_customer_id=? and c.customer_id=o.fk_customer_id and p.pro_id=o.fk_pro_id",[id],callback);
+   },
+   ViewOrderDetailsByCustomerId:function(id,callback){
+     return db.query("select c.*,p.*,o.*,MONTH(`order_date`),YEAR(`order_date`) from customer_tbl c,product_tbl p,order_tbl o where o.fk_customer_id=? and c.customer_id=o.fk_customer_id and p.pro_id=o.fk_pro_id ORDER BY o.order_date DESC",[id],callback);
    }
 }; 
 

@@ -35,6 +35,7 @@ var userOrder=require('./routes/order_user_routes')
 var userGetCustomer=require('./routes/getCustomersForUserSide_routes')
 var userOrderDelivery=require('./routes/order_delivery_user_routes')
 var userOrderDeliveryGet=require('./routes/order_delivery_user_getData');
+var userOrderDetails=require('./routes/viewOrderDetailsUser');
 
 var app = express();
 
@@ -79,6 +80,7 @@ app.use('/userOrder',userOrder)
 app.use('/userGetCustomer',userGetCustomer)
 app.use('/userOrderDelivery',userOrderDelivery)
 app.use('/userOrderDeliveryGet',userOrderDeliveryGet)
+app.use('/userOrderDetails',userOrderDetails)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
